@@ -11,7 +11,7 @@ let rover = {
 // Movement Sequence
 // ======================
 
-let movementSequence = "bb";
+let movementSequence = "bbbbbbbbbbbb";
 
 // ======================
 
@@ -19,95 +19,112 @@ function turnLeft(rover){
 
   console.log("Turning left");
 
-  if (rover.facing === "N") {
-    rover.facing = "W";
-  
-  } else if (rover.facing === "W") {
-    rover.facing = "S";
-
-  } else if (rover.facing === "S") {
-    rover.facing = "E";
-  
-  } else if (rover.facing === "E") {
-    rover.facing = "N";
-  
+    switch(rover.facing) {
+      case "N":
+        rover.facing = "W";
+        break;
+      case "W":
+        rover.facing = "S";
+        break;
+      case "S":
+        rover.facing = "E";
+        break;
+      case "E":
+        rover.facing = "N";
+        break;
+    }
   }
-
-}
 
 function turnRight(rover) {
 
   console.log("Turning right");
 
-  if (rover.facing === "N") {
-    rover.facing = "E";
-  
-  } else if (rover.facing === "E") {
-    rover.facing = "S";
-  
-  } else if (rover.facing === "S") {
-    rover.facing = "W";
-  
-  } else if (rover.facing === "W") {
-    rover.facing = "N";
-  
+  switch(rover.facing) {
+    case "N":
+      rover.facing = "E";
+      break;
+    case "E":
+      rover.facing = "S";
+      break;
+    case "S":
+      rover.facing = "W";
+      break;
+    case "W":
+      rover.facing = "N"
+      break;
   }
-
 }
 
 function moveForward(rover) {
 
   console.log("Moving forward")
 
-  if (rover.facing === "N" && rover.y <= 9) {
-    rover.y++;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+  if (rover.y <= 4 && rover.y >= -4 && rover.x <= 4 && rover.x >= -4 ) {
 
-  } else if (rover.facing === "E" && rover.x <= 9) {
-    rover.x++;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+    switch(rover.facing) {
 
-  } else if (rover.facing === "S" && rover.y >= -9) {
-    rover.y--;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+      case "N":
+        rover.y++;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
 
-  } else if (rover.facing === "W" && rover.x >= -9) {
-    rover.x--;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+      case "E":
+        rover.x++;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
+
+      case "S":
+        rover.y--;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
+
+      case "W":
+        rover.x--;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
+    }
 
   } else {
     console.log("Cannot move forward: out of boundaries!")
   }
 
-}
-
+} 
 function moveBackwards(rover) {
 
   console.log("Moving backwards")
 
-  if (rover.facing === "N" && rover.y >= -9) {
-    rover.y--;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+  if (rover.y <= 4 && rover.y >= -4 && rover.x <= 4 && rover.x >= -4 ) {
+  
+    switch(rover.facing) {
 
-  } else if (rover.facing === "E" && rover.x >= -9) {
-    rover.x--;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+      case "N":
+        rover.y--;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
 
-  } else if (rover.faving === "S" && rover.y <= 9) {
-    rover.y++;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+      case "E":
+        rover.x--;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
 
-  } else if (rover.facing === "W" && rover.x <= 9) {
-    rover.x++;
-    console.log("Current Position: " + rover.x + "/" + rover.y);
-    rover.travellog.push([rover.x + "/" + rover.y]);
+      case "S":
+        rover.y++;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
+
+      case "W":
+        rover.x++;
+        console.log("Current Position: " + rover.x + "/" + rover.y);
+        rover.travellog.push([rover.x + "/" + rover.y]);
+        break;
+    }
 
   } else {
     console.log("Cannot move backwards: out of boundaries!");
@@ -121,23 +138,25 @@ function movement(movementSequence) {
     
     let command = movementSequence[i]
 
-    if (command === "f") {
-      moveForward(rover);
-
-    } else if (command === "r") {
-      turnRight(rover);
-
-    } else if (command === "l") {
-      turnLeft(rover);
-
-    } else if (command === "b") {
-      moveBackwards(rover);
+    switch(command) {
+      case "f":
+        moveForward(rover);
+        break;
+      case "r":
+        turnRight(rover);
+        break;
+      case "l":
+        turnLeft(rover);
+        break;
+      case "b":
+        moveBackwards(rover);
+        break;
       
-    } else {
-      console.log("Invalid Command. Check Sequence!");
+      default:
+        console.log("Invalid Command. Check Sequence!"); 
     }
+    
   }
-
 }
 
 movement(movementSequence);
